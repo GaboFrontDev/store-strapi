@@ -20,25 +20,27 @@ commands = [
 @app.route("/", methods=["POST"])
 def build():
     data = request.get_json()
-    print("push request receive")
-    print(data['repository']['ssh_url'])
+    repo_url = data['repository']['ssh_url']
+    directory = data['repository']['name']
     try:
+      if not os.path.exists(directory):
         print("cloning")
-        repo_url = data['repository']['ssh_url']
-        directory = data['repository']['name']
-        if not os.path.exists(directory):
-          process = subprocess.Popen("git clone {}".format(repo_url), shell=True)
-          process.wait()
-
+        process = subprocess.Popen("git clone {}".format(repo_url), shell=True)
         process.wait()
-        print("building")
-        for cmd in commands:
-          process = subprocess.Popen("cd {} && {}".format(directory, cmd) , shell=True)
-          process.wait()
+
+      print("building")
+      os.chdir(directory)
+      for cmd in commands:
+        process = subprocess.Popen(cmd , shell=True)
+        process.wait()
+      return jsonify({"msg": "Deployed"}), 200
+    except FileNotFoundError:
+      print(f"La carpeta '{directory}' no existe.")
+    except Exception as e:
+      print(f"Ocurrió un error: {e}")
     except Exception as e:
         print(e)
         return jsonify({"msg": "Deploy failed"}), 500
-    return jsonify({"msg": "Deployed"}), 200
 
 
 if __name__ == "__main__":
