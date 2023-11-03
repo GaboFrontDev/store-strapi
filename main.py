@@ -10,10 +10,10 @@ tagCommand = ["make", "tag"]
 pushCommand = ["make", "push"]
 
 commands = [
-  pullCommand,
-  buildCommand,
-  tagCommand,
-  pushCommand,
+  "make pull",
+  "make build",
+  "make tag",
+  "make push",
 ]
 
 @app.route("/", methods=["GET", "POST"])
