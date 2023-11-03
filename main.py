@@ -24,7 +24,7 @@ def build():
         p = None
         for cmd in commands:
             if p:
-              p = subprocess.Popen(cmd, stdin=p.stdoutl, stdout=subprocess.PIPE)
+              p = subprocess.Popen(cmd, stdin=p.stdout, stdout=subprocess.PIPE)
             else:
               p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     except Exception as e:
