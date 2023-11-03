@@ -20,7 +20,7 @@ commands = [
 def build():
     data = request.get_json()
     print("building request init")
-    print(data['repository'])
+    print(data['repository']['ssh_url'])
     try:
         print("building")
         for cmd in commands:
