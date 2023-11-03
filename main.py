@@ -27,6 +27,7 @@ def build():
               p = subprocess.Popen(cmd, stdin=p.stdout, stdout=subprocess.PIPE)
             else:
               p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+            p.wait()
     except Exception as e:
         print(e)
         return jsonify({"msg": "Deploy failed"}), 500
