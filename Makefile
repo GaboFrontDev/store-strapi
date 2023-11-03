@@ -1,3 +1,5 @@
+pull:
+	git pull
 build:
 	docker-compose build telludire_deployer_backend --no-cache
 
