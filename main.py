@@ -1,5 +1,6 @@
 import subprocess
 from flask import Flask, jsonify, request
+import os
 
 
 app = Flask(__name__)
@@ -19,9 +20,18 @@ commands = [
 @app.route("/", methods=["POST"])
 def build():
     data = request.get_json()
-    print("building request init")
+    print("push request receive")
     print(data['repository']['ssh_url'])
     try:
+        print("cloning")
+        repo_url = data['repository']['ssh_url']
+        directory = data['repository']['name']
+        if not os.path.exists(directory):
+          process = subprocess.Popen("git clone {}".format(repo_url), shell=True)
+          process.wait()
+
+        process = subprocess.Popen("cd {}".format(directory), shell=True)
+        process.wait()
         print("building")
         for cmd in commands:
           process = subprocess.Popen(cmd, shell=True)
