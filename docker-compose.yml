@@ -1,7 +1,6 @@
 version: '3'
 services:
-  backend:
-    container_name: image_backend
+  telludire_deployer_backend:
     build:
       context: .
       dockerfile: ./docker/${ENVIRONMENT}/Dockerfile
@@ -20,10 +19,6 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       NODE_ENV: ${ENVIRONMENT}
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - .:/app
+      - ./node_modules:/app/node_modules
       - ./.env:/app/.env
-    networks:
-      - internal
-    depends_on:
-      - postgres
