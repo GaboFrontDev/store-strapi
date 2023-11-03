@@ -18,7 +18,7 @@ commands = [
 
 @app.route("/", methods=["POST"])
 def build():
-    print("Deploy request init")
+    print("building request init")
     try:
         print("building")
         p = None
@@ -35,4 +35,4 @@ def build():
 
 if __name__ == "__main__":
     # Please do not set debug=True in production
-    app.run(host="0.0.0.0", port=5510, debug=True)
+    app.run(host="0.0.0.0", port=5510, debug=False)
