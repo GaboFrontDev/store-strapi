@@ -33,14 +33,13 @@ def build():
       for cmd in commands:
         process = subprocess.Popen(cmd , shell=True)
         process.wait()
+      os.chdir(directory)
       return jsonify({"msg": "Deployed"}), 200
     except FileNotFoundError:
       print(f"La carpeta '{directory}' no existe.")
     except Exception as e:
       print(f"Ocurrió un error: {e}")
-    except Exception as e:
-        print(e)
-        return jsonify({"msg": "Deploy failed"}), 500
+    return jsonify({"msg": "Deploy failed"}), 500
 
 
 if __name__ == "__main__":
