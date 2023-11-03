@@ -1,9 +1,11 @@
 import subprocess
 from flask import Flask, jsonify, request
+from flask_script import Manager
 import os
 
 
 app = Flask(__name__)
+manager = Manager(app)
 
 pullCommand = ["make", "pull"]
 buildCommand = ["make", "build"]
@@ -45,4 +47,5 @@ def build():
 
 if __name__ == "__main__":
     # Please do not set debug=True in production
-    app.run(host="0.0.0.0", port=5510, debug=False)
+    # app.run(host="0.0.0.0", port=5510, debug=False)
+    manager.run()
