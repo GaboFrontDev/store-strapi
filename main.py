@@ -30,11 +30,10 @@ def build():
           process = subprocess.Popen("git clone {}".format(repo_url), shell=True)
           process.wait()
 
-        process = subprocess.Popen("cd {}".format(directory), shell=True)
         process.wait()
         print("building")
         for cmd in commands:
-          process = subprocess.Popen(cmd, shell=True)
+          process = subprocess.Popen("cd {} && {}".format(directory, cmd) , shell=True)
           process.wait()
     except Exception as e:
         print(e)
