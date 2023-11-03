@@ -21,13 +21,9 @@ def build():
     print("building request init")
     try:
         print("building")
-        p = None
         for cmd in commands:
-            if p:
-              p = subprocess.Popen(cmd, stdin=p.stdout, stdout=subprocess.PIPE)
-            else:
-              p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-            p.wait()
+          process = subprocess.Popen(cmd, shell=True)
+          process.wait()
     except Exception as e:
         print(e)
         return jsonify({"msg": "Deploy failed"}), 500
