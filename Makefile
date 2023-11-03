@@ -7,4 +7,4 @@ tag:
 	docker tag image-backend-strapi_telludire_deployer_backend docker.telluridedigitalworks.com:444/telludire_deployer_backend:latest
 
 push:
-	docker push docker.telluridedigitalworks.com:444/telludire_deployer_backend:latest
+	docker push https://docker.telluridedigitalworks.com:444/telludire_deployer_backend:latest
