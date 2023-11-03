@@ -9,14 +9,24 @@ buildCommand = ["make", "build"]
 tagCommand = ["make", "tag"]
 pushCommand = ["make", "push"]
 
+commands = [
+  pullCommand,
+  buildCommand,
+  tagCommand,
+  pushCommand,
+]
+
 @app.route("/", methods=["POST"])
 def build():
     print("Deploy request init")
     try:
         print("building")
-        p1 = subprocess.Popen(buildCommand, stdout=subprocess.PIPE)
-        p2 = subprocess.Popen(tagCommand, stdin=p1.stdoutl,  stdout=subprocess.PIPE)
-        subprocess.Popen(pushCommand, stdin=p2.stdoutl, stdout=subprocess.PIPE)
+        p = None
+        for cmd in commands:
+            if p:
+              p = subprocess.Popen(cmd, stdin=p.stdoutl, stdout=subprocess.PIPE)
+            else:
+              p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
     except Exception as e:
         print(e)
         return jsonify({"msg": "Deploy failed"}), 500
