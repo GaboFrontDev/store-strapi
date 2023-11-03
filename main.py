@@ -16,7 +16,7 @@ commands = [
   pushCommand,
 ]
 
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["GET"])
 def build():
     print("building request init")
     try:
