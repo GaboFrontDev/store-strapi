@@ -1,5 +1,5 @@
 import subprocess
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 
 app = Flask(__name__)
@@ -16,9 +16,11 @@ commands = [
   "make push",
 ]
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["POST"])
 def build():
+    data = request.get_json()
     print("building request init")
+    print(data)
     try:
         print("building")
         for cmd in commands:
