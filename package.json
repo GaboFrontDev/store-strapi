@@ -7,16 +7,18 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "postinstall": "cd node_modules/sharp && bun install"
   },
-  "devDependencies": {},
   "dependencies": {
     "@strapi/plugin-i18n": "4.2.3",
     "@strapi/plugin-users-permissions": "4.2.3",
     "@strapi/strapi": "4.2.3",
     "pg": "8.5.1",
+    "sharp": "^0.33.0",
     "strapi-stripe": "^3.2.1"
   },
+  "trustedDependencies": ["sharp"],
   "author": {
     "name": "A Strapi developer"
   },
