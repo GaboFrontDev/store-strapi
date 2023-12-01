@@ -1,6 +1,6 @@
 version: '3'
 services:
-  telludire_deployer_backend:
+  strapi:
     build:
       context: .
       dockerfile: ./docker/${ENVIRONMENT}/Dockerfile
@@ -22,3 +22,37 @@ services:
       - .:/app
       - ./node_modules:/app/node_modules
       - ./.env:/app/.env
+    networks:
+      - internal
+      - proxy-net
+    ports:
+      - "1337:1337"
+
+  postgres:
+    image: postgres:12.0-alpine
+    container_name: ${PROJECT_SLUG}_postgres
+    platform: linux/amd64
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    networks:
+      - internal
+      - proxy-net
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres-data:
+
+networks:
+  proxy-net:
+    name: store_network
+    external: true
+  internal:
+    name: strapi_internal
+    driver: bridge

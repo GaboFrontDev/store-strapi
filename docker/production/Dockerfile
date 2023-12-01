@@ -1,7 +1,5 @@
-FROM --platform=linux/amd64 node:16
-
+FROM oven/bun:latest
 # Installing libvips-dev for sharp Compatability
-RUN apt-get update && apt-get install libvips-dev -y
 
 # where our Strapi app will live
 RUN mkdir -p /app
@@ -11,24 +9,23 @@ WORKDIR /app
 
 # Copy package.json and package-lock.json
 # to the /app working directory
-COPY ./package*.json ./yarn.lock /app/
+COPY ./package*.json ./bun.lockb /app/
+
+
 COPY ./.env /app/
 
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Install dependencies in /app
-RUN yarn config set network-timeout 600000 -g && yarn install
+RUN bun i
 
 # Copy the rest of our Strapi folder into /app
-COPY . /app
+COPY ./backend /app
 
 EXPOSE 1337
 
-# For production build
-ENV NODE_ENV=${NODE_ENV}
-
 # Build Strapi admin
-RUN yarn build
+RUN bun build
 
 # Run yarn dev, as we would via the command line
-CMD ["yarn", "start"]
+CMD ["bun", "start"]
