@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_accounts",
+  "info": {
+    "singularName": "user-account",
+    "pluralName": "user-accounts",
+    "displayName": "userAccount"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "email": {
+      "type": "email"
+    },
+    "user_credential": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::user-credential.user-credential",
+      "inversedBy": "user_account"
+    }
+  }
+}
