@@ -40,6 +40,14 @@
     },
     "name": {
       "type": "string"
+    },
+    "sizes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::size.size"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
