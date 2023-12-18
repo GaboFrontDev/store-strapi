@@ -1,6 +1,7 @@
 version: '3'
 services:
   strapi:
+    container_name: store_strapi
     build:
       context: .
       dockerfile: ./docker/${ENVIRONMENT}/Dockerfile
@@ -51,7 +52,7 @@ volumes:
 
 networks:
   proxy-net:
-    name: store_network
+    name: store_external
     external: true
   internal:
     name: strapi_internal
