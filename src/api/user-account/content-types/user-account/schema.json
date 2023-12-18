@@ -4,7 +4,8 @@
   "info": {
     "singularName": "user-account",
     "pluralName": "user-accounts",
-    "displayName": "userAccount"
+    "displayName": "userAccount",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -27,13 +28,14 @@
       "type": "boolean"
     },
     "email": {
-      "type": "email"
+      "type": "email",
+      "unique": true,
+      "required": true
     },
     "user_credential": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::user-credential.user-credential",
-      "inversedBy": "user_account"
+      "target": "api::user-credential.user-credential"
     }
   }
 }

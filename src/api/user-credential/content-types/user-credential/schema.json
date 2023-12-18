@@ -4,7 +4,8 @@
   "info": {
     "singularName": "user-credential",
     "pluralName": "user-credentials",
-    "displayName": "UserCredential"
+    "displayName": "UserCredential",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,11 +21,8 @@
     "verification_token": {
       "type": "string"
     },
-    "user_account": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::user-account.user-account",
-      "inversedBy": "user_credential"
+    "uuid": {
+      "type": "uid"
     }
   }
 }
