@@ -51,6 +51,9 @@
     },
     "pay_url": {
       "type": "text"
+    },
+    "isHome": {
+      "type": "boolean"
     }
   }
 }
